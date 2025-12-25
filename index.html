@@ -2,61 +2,24 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>WebXR AR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body { margin:0; overflow:hidden; }
-    button {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 18px;
-      padding: 10px 20px;
-      z-index: 10;
-    }
-  </style>
+  <title>年賀AR</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
+  <script src="https://unpkg.com/aframe@1.4.2/dist/aframe.min.js"></script>
+  <script src="https://unpkg.com/ar.js@3.4.4/aframe/build/aframe-ar.min.js"></script>
 </head>
-<body>
 
-<button id="startAR">ARを開始</button>
+<body style="margin:0; overflow:hidden;">
+  <a-scene
+    embedded
+    vr-mode-ui="enabled: false"
+    arjs="sourceType: webcam; debugUIEnabled: false;"
+  >
+    <a-marker preset="hiro">
+      <a-box position="0 0.5 0" color="red"></a-box>
+    </a-marker>
 
-<script type="module">
-import * as THREE from 'https://unpkg.com/three@0.161.0/build/three.module.js';
-import { ARButton } from 'https://unpkg.com/three@0.161.0/examples/jsm/webxr/ARButton.js';
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera();
-const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-
-renderer.setSize(window.innerWidth, window.innerHeight);
-renderer.xr.enabled = true;
-document.body.appendChild(renderer.domElement);
-
-// ライト
-const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
-scene.add(light);
-
-// 干支代わりの箱
-const geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-const material = new THREE.MeshStandardMaterial({ color: 0xff0000 });
-const box = new THREE.Mesh(geometry, material);
-box.position.set(0, 0, -0.5);
-scene.add(box);
-
-// AR開始ボタン
-document.getElementById('startAR').onclick = () => {
-  document.body.appendChild(
-    ARButton.createButton(renderer, {
-      requiredFeatures: ['hit-test']
-    })
-  );
-};
-
-renderer.setAnimationLoop(() => {
-  renderer.render(scene, camera);
-});
-</script>
-
+    <a-entity camera></a-entity>
+  </a-scene>
 </body>
 </html>
