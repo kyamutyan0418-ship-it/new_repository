@@ -1,35 +1,32 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html>
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QRコードARデモ</title>
-  <!-- A-Frame と AR.js の読み込み -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/aframe/1.4.2/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-</head>
-<body style="margin: 0; overflow: hidden;">
-  <a-scene embedded
-           arjs="sourceType: webcam;
-                 debugUIEnabled: false;
-                 sourceParameters: {
-                   video: {
-                     width: { ideal: 4096, max: 4096 },
-                     height: { ideal: 2160, max: 2160 },
-                     facingMode: { ideal: 'environment' }
-                   }
-                 }">
-    <!-- マーカー（qr-code.patt）検出エリア -->
-    <a-marker type="pattern" url="qr-code.patt">
-      <!-- 3Dモデル表示エンティティ -->
-      <a-entity gltf-model="https://cdn.jsdelivr.net/gh/KhronosGroup/glTF-Sample-Models@master/2.0/Duck/glTF/Duck.gltf"
-                scale="1 1 1"
-                rotation="0 180 0">
-      </a-entity>
-    </a-marker>
 
-    <!-- ARカメラエンティティ -->
-    <a-entity camera></a-entity>
-  </a-scene>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.4/aframe/build/aframe-ar.js"></script>
+
+  <style>
+    body, html { margin:0; padding:0; overflow:hidden; width:100%; height:100%;}
+    #info { position:absolute; top:10px; width:100%; text-align:center; color:#fff; font-size:18px; z-index:100;}
+  </style>
+</head>
+<body>
+
+<div id="info">カメラ映像を許可して、マーカーを映してください</div>
+
+<a-scene 
+    embedded 
+    vr-mode-ui="enabled: false" 
+    arjs="sourceType: webcam; debugUIEnabled: false;">
+
+  <a-marker preset="hiro">
+    <a-box position="0 0.5 0" material="color: red;"></a-box>
+  </a-marker>
+
+  <a-entity camera></a-entity>
+</a-scene>
+
 </body>
 </html>
