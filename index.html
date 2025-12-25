@@ -2,24 +2,22 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>年賀AR</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-
-  <script src="https://unpkg.com/aframe@1.4.2/dist/aframe.min.js"></script>
-  <script src="https://unpkg.com/ar.js@3.4.4/aframe/build/aframe-ar.min.js"></script>
+  <title>Camera Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<body>
+  <button id="btn">タップしてカメラ起動</button>
+  <video id="video" autoplay playsinline style="width:100%;"></video>
 
-<body style="margin:0; overflow:hidden;">
-  <a-scene
-    embedded
-    vr-mode-ui="enabled: false"
-    arjs="sourceType: webcam; debugUIEnabled: false;"
-  >
-    <a-marker preset="hiro">
-      <a-box position="0 0.5 0" color="red"></a-box>
-    </a-marker>
-
-    <a-entity camera></a-entity>
-  </a-scene>
+  <script>
+    document.getElementById('btn').addEventListener('click', async () => {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        document.getElementById('video').srcObject = stream;
+      } catch (e) {
+        alert(e.name + ': ' + e.message);
+      }
+    });
+  </script>
 </body>
 </html>
