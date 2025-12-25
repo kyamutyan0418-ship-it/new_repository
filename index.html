@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
   <meta charset="utf-8">
   <title>AR Test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
+  <!-- A-Frame -->
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+  <!-- AR.js -->
   <script src="https://cdn.jsdelivr.net/npm/ar.js@3.4.4/aframe/build/aframe-ar.min.js"></script>
 </head>
 
@@ -16,7 +18,7 @@
     arjs="sourceType: webcam; debugUIEnabled: false;"
   >
     <a-marker preset="hiro">
-      <a-box position="0 0.5 0" material="color: red;"></a-box>
+      <a-box position="0 0.5 0" depth="0.5" height="0.5" width="0.5" color="red"></a-box>
     </a-marker>
 
     <a-entity camera></a-entity>
