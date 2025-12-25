@@ -2,11 +2,12 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <title>Camera Test</title>
+  <title>Camera Only Test</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-  <button id="btn">タップしてカメラ起動</button>
+  <button id="btn" style="font-size:20px;">タップしてカメラ起動</button>
+  <br><br>
   <video id="video" autoplay playsinline style="width:100%;"></video>
 
   <script>
@@ -15,7 +16,7 @@
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         document.getElementById('video').srcObject = stream;
       } catch (e) {
-        alert(e.name + ': ' + e.message);
+        alert(e.name + " : " + e.message);
       }
     });
   </script>
